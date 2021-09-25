@@ -20,17 +20,19 @@ export default function createDreamTeam(members) {
   let name = '';
 
   members.forEach(item => {        
-    if (!Number.isInteger(item) && item !== null && typeof(item) !== "boolean") {
-      arr.push(item.trim().substr(0, 1));    
-    }    
-    
+      if (!Number.isInteger(item) && item !== null && typeof(item) !== 'boolean' && typeof(item) !== 'number' && typeof(item) !== 'object' && typeof(item) !== 'undefined' && typeof(item) !== "symbol") {
+        console.log(typeof(item));
+        arr.push(item.trim().substr(0, 1).toUpperCase());    
+      }          
   });
-
+  
   arr.sort(function(a, b){
     if(a < b) return -1;
     if(a > b) return 1;
     return 0;
   });
+
+  if (arr.length == 0 ) return false;
 
   arr.forEach(str => {
     name += str;
@@ -39,7 +41,20 @@ export default function createDreamTeam(members) {
   return name;
 }
 
-// const members = ['Olivia', 1111, 'Lily', 'Oscar', true, null]; 
-
+//const members = [undefined]; 
+    // const a = [3],
+    //         b = [3.312312],
+    //         c = [false],
+    //         d = [null],
+    //         e = [undefined],
+    //         g = { 'foo': 'bar' };
 // createDreamTeam(members);
-// console.log('createDreamTeam(members): ', createDreamTeam(members));
+// console.log('createDreamTeam(a): ', createDreamTeam(a));
+// console.log('createDreamTeam(b): ', createDreamTeam(b));
+// console.log('createDreamTeam(c): ', createDreamTeam(c));
+// console.log('createDreamTeam(d): ', createDreamTeam(d));
+// console.log('createDreamTeam(e): ', createDreamTeam(e));
+
+// //console.log(typeof([{ 'foo': 'bar' }]));
+
+// console.log('createDreamTeam(g): ', createDreamTeam(g));
